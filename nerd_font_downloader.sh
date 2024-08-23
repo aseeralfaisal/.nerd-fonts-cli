@@ -36,6 +36,6 @@ find . -type f \( -name 'LICENSE.txt' -o -name 'README.md' \) -delete
 rm -rf ~/.fonts/"$font_file"
 rm -rf "$temp_dir"
 
-fc-cache -r
+fc-cache -f -v
 
 echo "${YELLOW}󰛖 Font installed successfully!${NC}"
