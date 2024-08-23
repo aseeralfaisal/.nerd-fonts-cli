@@ -3,7 +3,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
-echo "󰛖 Available from nerdfonts.com:"
+echo "${GREEN}󰛖 Available from nerdfonts.com:${NC}"
 
 entries=$(curl -s https://www.nerdfonts.com/font-downloads | \
 grep -o 'https://github.com/ryanoasis/nerd-fonts/releases/download/[^"]*' | \
@@ -18,18 +18,22 @@ read user_id
 download_link=$(echo "$entries" | awk -v id="$user_id" -F ' ' '$1 == id {print $4}')
 
 if [ -z "$download_link" ]; then
-  echo "${RED}Invalid ID. Please try again.${NC}"
+  echo "${RED}Invalid ID${NC}"
   exit 1
 fi
 
-echo "Downloading font..."
+echo " Downloading font...\n"
 wget -P ~/.fonts "$download_link"
 
 font_file=$(basename "$download_link")
-echo "Unzipping font..."
-unzip -d ~/.fonts ~/.fonts/"$font_file"
+echo " Unzipping font...\n"
+unzip -o -d "$temp_dir" ~/.fonts/"$font_file"
+
+cd "$temp_dir"
+find . -type f \( -name 'LICENSE.txt' -o -name 'README.md' \) -delete
 
 rm -rf ~/.fonts/"$font_file"
+rm -rf "$temp_dir"
 
 fc-cache -r
 
