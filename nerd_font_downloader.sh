@@ -16,6 +16,7 @@ echo "\n󰛖 ${YELLOW}Type ID to install fonts:${NC}"
 read user_id
 
 download_link=$(echo "$entries" | awk -v id="$user_id" -F ' ' '$1 == id {print $4}')
+temp_dir=$(mktemp -d)
 
 if [ -z "$download_link" ]; then
   echo "${RED}Invalid ID${NC}"
