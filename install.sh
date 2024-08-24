@@ -35,16 +35,6 @@ else
     echo "Error occurred"
 fi
 
-add_alias='
-nerd_fonts_cli() {
-  cd ~/.nerd-fonts-cli/ || return
-  chmod +x .install.sh
-  ./install.sh
-}
-alias nerd-fonts="nerd_fonts_cli"
-'
-echo "$add_alias" >> ~/.zshrc
-
 echo "󰁨 Finishing up...\n"
 rm -f README.md LICENSE.txt OFL.txt
 rm -f "$font_zip"
