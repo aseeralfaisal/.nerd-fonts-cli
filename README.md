@@ -1,7 +1,5 @@
-## Installing Nerd Fonts CLI
+## Installing Nerd Fonts
 ![image](https://github.com/user-attachments/assets/4fe944b9-7954-44c6-9b78-4ea8293611a8)
-
-To install the Nerd Fonts CLI tool, follow these steps:
 
 ### Prerequisites
 
