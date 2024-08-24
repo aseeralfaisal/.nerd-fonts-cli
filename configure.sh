@@ -7,4 +7,7 @@ nerd_fonts_cli() {
 alias nerd-fonts="nerd_fonts_cli"
 '
 echo "$config" >> ~/.zshrc
+source ~/.zshrc
+
+echo "Configured Successfully!"
 
