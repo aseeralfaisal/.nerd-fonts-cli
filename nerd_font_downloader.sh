@@ -1,4 +1,3 @@
-RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
@@ -14,28 +13,31 @@ echo "$entries"
 
 echo "\n󰛖 ${YELLOW}Type ID to install fonts:${NC}"
 read user_id
+echo
 
 download_link=$(echo "$entries" | awk -v id="$user_id" -F ' ' '$1 == id {print $4}')
-temp_dir=$(mktemp -d)
 
 if [ -z "$download_link" ]; then
   echo "${RED}Invalid ID${NC}"
   exit 1
 fi
 
+
 echo " Downloading font...\n"
-wget -P ~/.fonts "$download_link"
+font_zip=$(basename "$download_link")
+wget -q --show-progress -O ~/.fonts/"$font_zip" "$download_link"
 
-font_file=$(basename "$download_link")
-echo " Unzipping font...\n"
-unzip -o -d "$temp_dir" ~/.fonts/"$font_file"
+echo " Extracting font...\n"
+cd ~/.fonts
+if unzip -o -qq "$font_zip" -d ~/.fonts; then
+    fc-cache -f -r
+else
+    echo "Error occurred during installation"
+fi
 
-cd "$temp_dir"
-find . -type f \( -name 'LICENSE.txt' -o -name 'README.md' \) -delete
+echo "󰁨 Finishing up...\n"
+rm -f README.md LICENSE.txt OFL.txt
+rm -f "$font_zip"
 
-rm -rf ~/.fonts/"$font_file"
-rm -rf "$temp_dir"
 
-fc-cache -f -v
-
-echo "${YELLOW}󰛖 Font installed successfully!${NC}"
+echo "${YELLOW}󰛖 Font installed successfully!${GREEN} 󰁨"
