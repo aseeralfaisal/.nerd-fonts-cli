@@ -16,28 +16,27 @@ read user_id
 echo
 
 download_link=$(echo "$entries" | awk -v id="$user_id" -F ' ' '$1 == id {print $4}')
+font_dir="$HOME/.fonts"
 
 if [ -z "$download_link" ]; then
   echo "${RED}Invalid ID${NC}"
   exit 1
 fi
 
-
 echo " Downloading font...\n"
 font_zip=$(basename "$download_link")
-wget -q --show-progress -O ~/.fonts/"$font_zip" "$download_link"
+wget -q --show-progress -O "$font_dir"/"$font_zip" "$download_link"
 
 echo " Extracting font...\n"
-cd ~/.fonts
-if unzip -o -qq "$font_zip" -d ~/.fonts; then
+cd "$font_dir"
+if unzip -o -qq "$font_zip" -d "$font_dir"; then
     fc-cache -f -r
 else
-    echo "Error occurred during installation"
+    echo "Error occurred"
 fi
 
 echo "󰁨 Finishing up...\n"
 rm -f README.md LICENSE.txt OFL.txt
 rm -f "$font_zip"
-
 
 echo "${YELLOW}󰛖 Font installed successfully!${GREEN} 󰁨"
