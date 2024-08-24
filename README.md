@@ -9,7 +9,7 @@ Ensure you have the following prerequisites:
 
 ### Installation Steps
 
-1. **Clone the Repository**
+1. **Clone the Repository into Your Home Directory**
 
    First, clone the Nerd Fonts CLI repository to your local machine using Git:
 
@@ -27,3 +27,7 @@ Ensure you have the following prerequisites:
 5. **Run the Installation Script**
    ```bash
    ./install.sh
+
+6. **Configure Aliases (Optional)**
+   ```bash
+   ./configure.sh
