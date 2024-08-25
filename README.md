@@ -1,5 +1,5 @@
 ## Installing Nerd Fonts
-![image](https://github.com/user-attachments/assets/4fe944b9-7954-44c6-9b78-4ea8293611a8)
+![image](https://github.com/user-attachments/assets/c7ab401e-513f-49f9-b7f4-f80f0d8ea580)
 
 ### Prerequisites
 
