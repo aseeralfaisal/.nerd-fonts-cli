@@ -16,16 +16,18 @@ read user_id
 echo
 
 download_link=$(echo "$entries" | awk -v id="$user_id" -F ' ' '$1 == id {print $4}')
-font_dir="$HOME/.fonts"
 
 if [ -z "$download_link" ]; then
   echo "${RED}Invalid ID${NC}"
   exit 1
 fi
 
+font_dir="$HOME/.fonts"
+mkdir "$font_dir"
+
 echo " Downloading font...\n"
 font_zip=$(basename "$download_link")
-wget -q --show-progress -O "$font_dir"/"$font_zip" "$download_link"
+wget -O "$font_dir"/"$font_zip" "$download_link"
 
 echo " Extracting font...\n"
 cd "$font_dir"
